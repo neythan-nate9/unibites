@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order - UNI BITES</title>
+    <style>
+        /* Reuse global styles from index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: url('images/b.jpg') no-repeat center center/cover;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #143814, #21521a);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #ffeb3b;
+        }
+        
+        /* Order Specific Styles */
+        .order-header {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        .order-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .order-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+        
+        @media (min-width: 768px) {
+            .order-container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        .order-summary, .customer-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #ff7e5f;
+        }
+        
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+        
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-btn {
+            background: #eee;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity {
+            margin: 0 0.5rem;
+        }
+        
+        .remove-item {
+            color: #ff7e5f;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        
+        .cart-totals {
+            margin-top: 2rem;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .total-row.grand-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #eee;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #ff7e5f;
+        }
+        
+        .payment-methods {
+            margin: 1.5rem 0;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+        
+        .payment-option input {
+            margin-right: 0.8rem;
+        }
+        
+        .btn-checkout {
+            background: #ff7e5f;
+            color: white;
+            border: none;
+            padding: 1rem;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-checkout:hover {
+            background: #feb47b;
+        }
+        
+        /* Footer (same as index.html) */
+        footer {
+            background: #0e3709;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: rgb(127, 161, 215);
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">UNI BITES</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="order.html" class="active">Order</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="booking.html">Booking</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="order-header">
+        <div class="container">
+            <h1>Place Your Order</h1>
+            <p>Review your items and complete your order</p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <div class="order-container">
+            <div class="order-summary">
+                <h2 class="section-title">Your Order</h2>
+                <div class="cart-items" id="cart-items">
+                    <!-- Cart items will be inserted here by JavaScript -->
+                </div>
+                
+                <div class="cart-totals">
+                    <div class="total-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">UGX 0</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Delivery Fee:</span>
+                        <span id="delivery">UGX 3,000</span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>Total:</span>
+                        <span id="total">UGX 3,000</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="customer-info">
+                <h2 class="section-title">Customer Information</h2>
+                <form id="order-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email (optional)</label>
+                        <input type="email" id="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Delivery Address</label>
+                        <input type="text" id="address" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Special Instructions</label>
+                        <textarea id="notes" class="form-control" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="payment-methods">
+                        <h3>Payment Method</h3>
+                        <div class="payment-option">
+                            <input type="radio" id="mobile-money" name="payment" value="mobile-money" checked>
+                            <label for="mobile-money">Mobile Money</label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="cash" name="payment" value="cash">
+                            <label for="cash">Cash on Delivery</label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="card" name="payment" value="card">
+                            <label for="card">Credit/Debit Card</label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-checkout">Complete Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <h3>UNI BITES RESTAURANT</h3>
+            <p>The University's Premier Dining Experience</p>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="booking.html">Booking</a></li>
+            </ul>
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>WhatsApp Link</title>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+                <style>
+                  .whatsapp-link {
+                    display: inline-flex;
+                    align-items: center;
+                    background-color: #25D366;
+                    color: white;
+                    padding: 10px 15px;
+                    border-radius: 8px;
+                    text-decoration: none;
+                    font-weight: bold;
+                    transition: background-color 0.3s ease;
+                  }
+              
+                  .whatsapp-link:hover {
+                    background-color: #1ebe5d;
+                  }
+              
+                  .whatsapp-link i {
+                    margin-right: 10px;
+                    font-size: 20px;
+                  }
+                </style>
+              </head>
+              <body>
+              
+              <a class="whatsapp-link" href="https://wa.me/256756889155?text=Hello%2C%20I%20would%20like%20to%20place%20an%20order" target="_blank">
+                <i class="fab fa-whatsapp"></i> Chat with us on WhatsApp
+              </a>
+              
+              </body>
+              </html>
+            <p>&copy; 2025 UNI BITES. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Sample Cart Data
+        const cartItems = [
+            {
+                id: 1,
+                name: "Chicken Curry",
+                price: 18000,
+                quantity: 1,
+                image: "images/lunch1.jpg"
+            },
+            {
+                id: 3,
+                name: "Grilled Fish",
+                price: 22000,
+                quantity: 2,
+                image: "images/dinner1.jpg"
+            }
+        ];
+        
+        // Display Cart Items
+        function displayCartItems() {
+            const cartContainer = document.getElementById('cart-items');
+            cartContainer.innerHTML = '';
+            
+            if (cartItems.length === 0) {
+                cartContainer.innerHTML = '<p>Your cart is empty. <a href="menu.html">Browse our menu</a> to add items.</p>';
+                return;
+            }
+            
+            cartItems.forEach(item => {
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                cartItemElement.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-img">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div>
+                            <h4>${item.name}</h4>
+                            <p>UGX ${item.price.toLocaleString()}</p>
+                        </div>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                        <span class="quantity">${item.quantity}</span>
+                        <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                        <span class="remove-item" data-id="${item.id}">×</span>
+                    </div>
+                `;
+                cartContainer.appendChild(cartItemElement);
+            });
+            
+            // Add event listeners to quantity buttons
+            document.querySelectorAll('.quantity-btn.minus').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    updateQuantity(itemId, -1);
+                });
+            });
+            
+            document.querySelectorAll('.quantity-btn.plus').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    updateQuantity(itemId, 1);
+                });
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    removeItem(itemId);
+                });
+            });
+            
+            // Update totals
+            updateTotals();
+        }
+        
+        // Update Quantity
+        function updateQuantity(itemId, change) {
+            const itemIndex = cartItems.findIndex(item => item.id === itemId);
+            if (itemIndex !== -1) {
+                cartItems[itemIndex].quantity += change;
+                
+                // Remove item if quantity reaches 0
+                if (cartItems[itemIndex].quantity <= 0) {
+                    cartItems.splice(itemIndex, 1);
+                }
+                
+                displayCartItems();
+            }
+        }
+        
+        // Remove Item
+        function removeItem(itemId) {
+            const itemIndex = cartItems.findIndex(item => item.id === itemId);
+            if (itemIndex !== -1) {
+                cartItems.splice(itemIndex, 1);
+                displayCartItems();
+            }
+        }
+        
+        // Update Totals
+        function updateTotals() {
+            const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryFee = 3000;
+            const total = subtotal + deliveryFee;
+            
+            document.getElementById('subtotal').textContent = `UGX ${subtotal.toLocaleString()}`;
+            document.getElementById('total').textContent = `UGX ${total.toLocaleString()}`;
+        }
+        
+        // Form Submission
+        document.getElementById('order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real app, you would send this data to the server
+            const orderData = {
+                customer: {
+                    name: document.getElementById('name').value,
+                    phone: document.getElementById('phone').value,
+                    email: document.getElementById('email').value,
+                    address: document.getElementById('address').value,
+                    notes: document.getElementById('notes').value
+                },
+                payment: document.querySelector('input[name="payment"]:checked').value,
+                items: cartItems,
+                subtotal: cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                delivery: 3000,
+                total: cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0) + 3000
+            };
+            
+            console.log('Order submitted:', orderData);
+            alert('Order placed successfully! Thank you for choosing UNI BITES.');
+            
+            // In a real app, you would redirect to order confirmation page
+            // window.location.href = 'order-confirmation.html';
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            displayCartItems();
+        });
+    </script>
+</body>
+</html>

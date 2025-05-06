@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu - UNI BITES</title>
+    <style>
+        /* Reuse global styles from index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: url('images/0.jpg') no-repeat center center/cover;
+            color: #11280d;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #12400c, #0e430c);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #ffeb3b;
+        }
+        
+        /* Menu Specific Styles */
+        .menu-header {
+            text-align: center;
+            padding: 3rem 0;
+            background: url('images/i.jpg') no-repeat center center/cover;
+            color: white;
+            position: relative;
+        }
+        
+        .menu-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+        }
+        
+        .menu-header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .menu-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: rgb(206, 156, 156);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            background: #ff7e5f;
+            color: white;
+        }
+        
+        .menu-items {
+            padding: 3rem 0;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .menu-item-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .menu-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .menu-item:hover .menu-item-img img {
+            transform: scale(1.1);
+        }
+        
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+        
+        .menu-item-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .menu-item-price {
+            color: #ff7e5f;
+            font-weight: bold;
+        }
+        
+        .menu-item-desc {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .add-to-cart {
+            background: #ff7e5f;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .add-to-cart:hover {
+            background: #feb47b;
+        }
+        
+        /* Footer (same as index.html) */
+        footer {
+            background: #1b360d;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: rgb(141, 190, 221);
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">UNI BITES</div> 
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html" class="active">Menu</a></li>
+                    <li><a href="order.html">Order</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="booking.html">Booking</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="menu-header">
+        <div class="container menu-header-content">
+            <h1>Our Delicious Menu</h1>
+            <p>Choose from our wide variety of dishes prepared fresh daily</p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <div class="menu-categories">
+            <button class="category-btn active" data-category="all">All Items</button>
+            <button class="category-btn" data-category="breakfast">Breakfast</button>
+            <button class="category-btn" data-category="lunch">Lunch</button>
+            <button class="category-btn" data-category="dinner">Dinner</button>
+            <button class="category-btn" data-category="snacks">Snacks</button>
+            <button class="category-btn" data-category="beverages">Beverages</button>
+        </div>
+        
+        <section class="menu-items">
+            <div class="menu-grid" id="menu-grid">
+                <!-- Menu items will be inserted here by JavaScript -->
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <h3>UNI BITES RESTAURANT</h3>
+            <p>The University's Premier Dining Experience</p>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="booking.html">Booking</a></li>
+            </ul>
+            <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp Link</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .whatsapp-link {
+      display: inline-flex;
+      align-items: center;
+      background-color: #25D366;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .whatsapp-link:hover {
+      background-color: #1ebe5d;
+    }
+
+    .whatsapp-link i {
+      margin-right: 10px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<a class="whatsapp-link" href="https://wa.me/256756889155?text=Hello%2C%20I%20would%20like%20to%20place%20an%20order" target="_blank">
+  <i class="fab fa-whatsapp"></i> Chat with us on WhatsApp
+</a>
+
+</body>
+</html>
+            <p>&copy; 2025 UNI BITES. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Menu Data
+        const menuItems = [
+            {
+                id: 1,
+                name: "Full English Breakfast",
+                description: "Eggs, bacon, sausages, beans, toast, and mushrooms",
+                price: 15000,
+                category: "breakfast",
+                image: "images/o.jpg"
+            },
+            {
+                id: 2,
+                name: "Pancake Stack",
+                description: "Fluffy pancakes with maple syrup and fresh fruits",
+                price: 12000,
+                category: "breakfast",
+                image: "images/p.jpg"
+            },
+            {
+                id: 3,
+                name: "Chicken Curry",
+                description: "Spicy chicken curry with rice and chapati",
+                price: 18000,
+                category: "lunch",
+                image: "images/v.jpg"
+            },
+            {
+                id: 4,
+                name: "Beef Stew",
+                description: "Tender beef stew with mashed potatoes",
+                price: 20000,
+                category: "lunch",
+                image: "images/m.jpg"
+            },
+            {
+                id: 5,
+                name: "Grilled Fish",
+                description: "Fresh tilapia with vegetables and ugali",
+                price: 22000,
+                category: "dinner",
+                image: "images/n.jpg"
+            },
+            {
+                id: 6,
+                name: "Vegetable Pizza",
+                description: "12-inch pizza with assorted vegetables",
+                price: 25000,
+                category: "dinner",
+                image: "images/g.jpg"
+            },
+            {
+                id: 7,
+                name: "Samosa",
+                description: "Crispy samosas with beef filling",
+                price: 3000,
+                category: "snacks",
+                image: "images/z.jpg"
+            },
+            {
+                id: 8,
+                name: "Fresh Juice",
+                description: "Seasonal fruit juice (mango, pineapple, or passion)",
+                price: 5000,
+                category: "beverages",
+                image: "images/x.jpg"
+            },
+            {
+                id: 9,
+                name: "Refreshments",
+                description: "Ice Cold Sodas  (Coca cola, Pepsi, Fanta, Mirinda)",
+                price: 5000,
+                category: "beverages",
+                image: "images/q.jpg"
+            },
+        ];
+        
+        // Display Menu Items
+        function displayMenuItems(category = 'all') {
+            const menuGrid = document.getElementById('menu-grid');
+            menuGrid.innerHTML = '';
+            
+            const filteredItems = category === 'all' 
+                ? menuItems 
+                : menuItems.filter(item => item.category === category);
+            
+            filteredItems.forEach(item => {
+                const menuItemElement = document.createElement('div');
+                menuItemElement.className = 'menu-item';
+                menuItemElement.innerHTML = `
+                    <div class="menu-item-img">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <span>${item.name}</span>
+                            <span class="menu-item-price">UGX ${item.price.toLocaleString()}</span>
+                        </div>
+                        <p class="menu-item-desc">${item.description}</p>
+                        <button class="add-to-cart" data-id="${item.id}">Add to Cart</button>
+                    </div>
+                `;
+                menuGrid.appendChild(menuItemElement);
+            });
+            
+            // Add event listeners to Add to Cart buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    addToCart(itemId);
+                });
+            });
+        }
+        
+        // Add to Cart Function
+        function addToCart(itemId) {
+            const item = menuItems.find(item => item.id === itemId);
+            if (item) {
+                // In a real app, you would save this to localStorage or send to server
+                alert(`${item.name} added to cart!`);
+                console.log('Added to cart:', item);
+            }
+        }
+        
+        // Category Filter
+        document.querySelectorAll('.category-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+                const category = this.getAttribute('data-category');
+                displayMenuItems(category);
+            });
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            displayMenuItems();
+        });
+    </script>
+</body>
+</html>
